@@ -9,6 +9,24 @@ function createServer() {
 	});
 
 	server.registerTool(
+	  	"hello",
+  	{
+	    description: "Hello World를 반환하는 테스트 도구",
+	    inputSchema: z.object({
+      	name: z.string().optional(),
+	    }),
+	  },
+  	async ({ name }) => ({
+	    content: [
+      	{
+	        type: "text",
+        	text: name ? `Hello World, ${name}!` : "Hello World",
+	      },
+	    ],
+	  }),
+	);
+	
+	server.registerTool(
 		"add",
 		{ inputSchema: z.object({ a: z.number(), b: z.number() }) },
 		async ({ a, b }) => ({
